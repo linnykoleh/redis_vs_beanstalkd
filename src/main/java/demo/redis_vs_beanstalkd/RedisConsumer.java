@@ -6,7 +6,7 @@ import redis.clients.jedis.JedisClientConfig;
 public class RedisConsumer implements Runnable {
 
     private static final String QUEUE_NAME = "message_queue";
-    private static final int MESSAGES_PER_THREAD = 100_000; // Messages each thread will consume
+    private static final int MESSAGES_PER_THREAD = 100_000;
     private static final int THREAD_COUNT = 10;
 
     public static void main(String[] args) throws InterruptedException {

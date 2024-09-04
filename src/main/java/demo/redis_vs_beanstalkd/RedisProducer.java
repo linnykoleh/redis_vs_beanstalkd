@@ -6,7 +6,7 @@ import redis.clients.jedis.JedisClientConfig;
 public class RedisProducer implements Runnable {
 
     private static final String QUEUE_NAME = "message_queue";
-    private static final int MESSAGES_PER_THREAD = 100_000; // Messages each thread will produce
+    private static final int MESSAGES_PER_THREAD = 100_000;
     private static final String MESSAGE = "Heavy load message";
     private static final int THREAD_COUNT = 10;
 

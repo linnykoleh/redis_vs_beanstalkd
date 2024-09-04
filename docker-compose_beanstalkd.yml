@@ -1,41 +1,40 @@
 version: '3.8'
 
 services:
-  redis-master:
-    image: redis:latest
-    container_name: redis-master
+  beanstalkd-1:
+    image: schickling/beanstalkd
+    container_name: beanstalkd-1
+    platform: linux/amd64
     ports:
-      - "6379:6379"
+      - "11300:11300"
     volumes:
-      - ./conf/redis/redis-master.conf:/usr/local/etc/redis/redis.conf
-      - ./data:/data
-    command: redis-server /usr/local/etc/redis/redis.conf
+      - ./data/beanstalkd-1:/data
+    environment:
+      BEANSTALKD_PORT: 11300
 
-  redis-slave-1:
-    image: redis:latest
-    container_name: redis-slave-1
+  beanstalkd-2:
+    image: schickling/beanstalkd
+    container_name: beanstalkd-2
+    platform: linux/amd64
     ports:
-      - "6380:6379"
+      - "11301:11300"
     volumes:
-      - ./conf/redis/redis-slave.conf:/usr/local/etc/redis/redis.conf
-      - ./data:/data
-    command: redis-server /usr/local/etc/redis/redis.conf
-    depends_on:
-      - redis-master
+      - ./data/beanstalkd-2:/data
+    environment:
+      BEANSTALKD_PORT: 11300
 
-  redis-slave-2:
-    image: redis:latest
-    container_name: redis-slave-2
+  beanstalkd-3:
+    image: schickling/beanstalkd
+    container_name: beanstalkd-3
+    platform: linux/amd64
     ports:
-      - "6381:6379"
+      - "11302:11300"
     volumes:
-      - ./conf/redis/redis-slave.conf:/usr/local/etc/redis/redis.conf
-      - ./data:/data
-    command: redis-server /usr/local/etc/redis/redis.conf
-    depends_on:
-      - redis-master
+      - ./data/beanstalkd-3:/data
+    environment:
+      BEANSTALKD_PORT: 11300
 
 volumes:
-  redis-master-data:
-  redis-slave-1-data:
-  redis-slave-2-data:
+  beanstalkd-1-data:
+  beanstalkd-2-data:
+  beanstalkd-3-data:
